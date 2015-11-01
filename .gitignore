@@ -1,0 +1,8 @@
+.hgignore
+.hg/
+
+.DS_Store
+*#
+.#*
+.repl
+*~
