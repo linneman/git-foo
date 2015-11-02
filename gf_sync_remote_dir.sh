@@ -8,9 +8,9 @@
 # on the remote side.
 #
 # Invocation:
-# ./gf_sync_remote_dir.ssh -l <local backup root directory> \\
-#                          -h <host to fetch from> \\
-#                          -p [ssh port] <backup directories list>
+# ./gf_sync_remote_dir.sh -l <local backup root directory> \\
+#                         -h <host to fetch from> \\
+#                         -p [ssh port] <backup directories list>
 #
 # The use and distribution terms for this software are covered by
 # the GNU General Public License.
@@ -57,15 +57,12 @@ function syn_remote_dir() {
             # repository exists, just fetch
             cd "$local_root_dir/$fq"
             if $is_bare ; then
-                local clone_cmd="git fetch origin '*:*'"
+                local fetch_cmd="git remote update"
             else
-                local clone_cmd="git fetch origin --tags"
+                local fetch_cmd="git fetch origin --tags"
             fi
-            echo "cd $local_root_dir/$fq ; $clone_cmd"
-            eval $clone_cmd
-            if [ $? -ne 0 ]; then
-                errors=$(expr $errors + 1)
-            fi
+            echo "cd $local_root_dir/$fq ; $fetch_cmd"
+            eval $fetch_cmd
         else
             # repository does not exist yet, so clone it
             if [ ! -d $fq ] ; then
@@ -81,10 +78,11 @@ function syn_remote_dir() {
 
             echo $clone_cmd
             eval $clone_cmd
-            if [ $? -ne 0 ]; then
-                errors=$(expr $errors + 1)
-            fi
         fi
+
+	if [ $? -ne 0 ]; then
+	    errors=$(expr $errors + 1)
+	fi
 
         echo
 
@@ -103,9 +101,9 @@ function print_help() {
     echo "on the remote side."
     echo
     echo "Invocation:"
-    echo "./gf_sync_remote_dir.ssh -l <local backup root directory> \\"
-    echo "                         -h <host to fetch from> \\"
-    echo "                         -p [ssh port] <backup directories list>"
+    echo "./gf_sync_remote_dir.sh -l <local backup root directory> \\"
+    echo "                        -h <host to fetch from> \\"
+    echo "                        -p [ssh port] <backup directories list>"
     echo
     echo "The use and distribution terms for this software are covered by"
     echo "the GNU General Public License."

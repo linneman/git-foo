@@ -12,9 +12,9 @@ on the remote side.
 
 Invocation:
 
-    ./gf_sync_remote_dir.ssh -l <local backup root directory> \\
-                             -h <host to fetch from> \\
-                             -p [ssh port] <backup directories list>
+    ./gf_sync_remote_dir.sh -l <local backup root directory> \\
+                            -h <host to fetch from> \\
+                            -p [ssh port] <backup directories list>
 
 ## Licence
 This software stands under the terms of the
