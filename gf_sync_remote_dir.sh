@@ -47,7 +47,7 @@ function syn_remote_dir() {
         if [ $r == ".git" ] ; then
             # splitt off last slash for path of non-bare repos
             fq=$p
-            p=${p%/*}
+            p="./"$p ; p=${p%/*}
             is_bare=false
         else
             is_bare=true
