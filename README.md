@@ -16,6 +16,20 @@ Invocation:
                             -h <host to fetch from> \\
                             -p [ssh port] <backup directories list>
 
+## gf\_diff\_manifests - print diff log between two manifest files
+
+Parses given [Android repo](https://source.android.com/source/using-repo.html)
+manifest.xml files, walks through all git repositories declared inside
+them and generates a diff log. This is especially usefull when for the
+generation of a changelog introduced with a new software release.
+
+Invocation: (from Android build root directory)
+
+    ./gf_diff_manifests.sh <old_manifest> <new_manifest>
+
+The manifest files are fetched from the directory .repo/manifests.
+
+
 ## Licence
 This software stands under the terms of the
 [GNU General Public Licence](http://www.gnu.org/licenses/gpl.html).
